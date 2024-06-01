@@ -1,5 +1,6 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -19,7 +20,23 @@ kotlin {
     }
     
     jvm("desktop")
-    
+
+    // JSPlatform Step1
+    js(IR){
+        moduleName = "EduKmpApp"
+        browser(){
+            // Tool bundler for converting kotlin code to js code
+            commonWebpackConfig(){
+                outputFileName = "EduKmpApp.js"
+
+                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).copy()
+            }
+
+            binaries.executable() // it will generate executable js files
+        }
+
+    }
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -121,4 +138,9 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+// Step3
+compose.experimental {
+    web.application {}
 }
