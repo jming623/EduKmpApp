@@ -1,5 +1,6 @@
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
@@ -37,6 +38,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.seiko.imageloader.rememberImagePainter
+import data.Product
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -44,21 +46,11 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import edukmpapp.composeapp.generated.resources.Res
 import edukmpapp.composeapp.generated.resources.compose_multiplatform
 import kotlinx.coroutines.launch
-
-@OptIn(ExperimentalResourceApi::class)
-@Composable
-@Preview
-fun App() {
-    MaterialTheme {
-        AppContent(homeViewModel = HomeViewModel())
-    }
-}
+import list.ListComponent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppContent(homeViewModel: HomeViewModel) {
-
-    val products = homeViewModel.products.collectAsState()
+fun AppContent(products: State<ListComponent.Model>, onItemClicked: (Product) -> Unit) {
 
     BoxWithConstraints {
         val scope = this
@@ -113,12 +105,14 @@ fun AppContent(homeViewModel: HomeViewModel) {
                 }
 
                 items(
-                    items = products.value,
+                    items = products.value.items,
                     key = { product -> product.id.toString() }) { product ->
 
                     Card(
                         shape = RoundedCornerShape(15.dp),
-                        modifier = Modifier.padding(8.dp).fillMaxWidth(),
+                        modifier = Modifier.padding(8.dp).fillMaxWidth().clickable{
+                            onItemClicked(product)
+                        },
                         elevation = 2.dp
                     ){
                         Column(

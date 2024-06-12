@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    kotlin("plugin.serialization") version "2.0.0-RC3"
+    kotlin("plugin.serialization") version "2.0.0-RC3" //Decompose Step2
 }
 
 kotlin {
@@ -55,6 +55,10 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.android)
+
+            //Decompose Step3
+            implementation("com.arkivanov.decompose:decompose:2.2.2-compose-experimental")
+            implementation("com.arkivanov.decompose:extensions-compose-jetbrains:2.2.2-compose-experimental")
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -79,6 +83,9 @@ kotlin {
             implementation(libs.mvvm.core)
 
             api(libs.image.loader)
+            // Decompose Step1 - navigation사용 목적
+            implementation("com.arkivanov.decompose:decompose:2.2.2-compose-experimental")
+            implementation("com.arkivanov.decompose:extensions-compose-jetbrains:2.2.2-compose-experimental")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

@@ -11,6 +11,7 @@ androidx-espresso-core = "3.5.1"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.1.5"
 compose-plugin = "1.6.10"
+decompose = "<version>"
 imageLoader = "1.7.8"
 junit = "4.13.2"
 kotlin = "2.0.0"
@@ -21,6 +22,7 @@ mvvmCore = "0.16.1"
 material3Android = "1.2.1"
 
 [libraries]
+decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoader" }
 image-loader-extension-blur = { module = "io.github.qdsfdhvh:image-loader-extension-blur", version.ref = "imageLoader" }
 image-loader-extension-imageio = { module = "io.github.qdsfdhvh:image-loader-extension-imageio", version.ref = "imageLoader" }

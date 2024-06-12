@@ -1,9 +1,6 @@
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.arkivanov.decompose.DefaultComponentContext
-import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.component.setupDefaultComponents
 import com.seiko.imageloader.intercept.bitmapMemoryCacheConfig
@@ -11,8 +8,6 @@ import com.seiko.imageloader.intercept.imageMemoryCacheConfig
 import com.seiko.imageloader.intercept.painterMemoryCacheConfig
 import okio.Path.Companion.toOkioPath
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import root.DefaultRootComponent
-import root.RootContent
 import java.io.File
 
 fun main() = application {
@@ -20,13 +15,7 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "EduKmpApp",
     ) {
-        // commonMain쪽에서 작업후 App()을 아래와같이 변경했을 때, 화면이 모두 공유 됨. (하나의 코드로 여러 플랫폼에서 사용할 수 있다.)
-        val homeViewModel = HomeViewModel()
-        val root = DefaultRootComponent(
-            componentContext = DefaultComponentContext(LifecycleRegistry()),
-            homeViewModel
-        )
-        RootContent(root, modifier = Modifier)
+        App()
     }
 }
 
@@ -88,5 +77,5 @@ private fun getCacheDir() = when (currentOperatingSystem) {
 @Preview
 @Composable
 fun AppDesktopPreview() {
-//    App()
+    App()
 }
