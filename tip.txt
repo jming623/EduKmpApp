@@ -2,3 +2,10 @@ Compose Multiflatform 학습하면서 알게된 내용들
 
 
 1. 화면 라우팅을 위해 제트팩을 사용할 수 있는데 다중플랫폼에서는 지원이 미흡해, 대안으로 Decompose라는 라이브러리를 사용할 수 있다.
+2. 동작 순서 (현재프로젝트 기준)
+    (완전 처음부터 어떻게 동작하는지까지는 아직 모르겠지만)
+    (1) AndroidManifest.xml에 정의된 application태그 내부에 android:name으로 지정된 Application()을 생성한다.
+    (2) AndroidManifest.xml에 정의된 application태그 -> activity 태그 내부에 android:name으로 지정된 ComponentActivity()를 생성한다.
+    (3) ComponentActivity 객체에 정의된 onCreate 이벤트를 타고 RootContent 객체를 생성한다. (여기서는 Koin을 통해 자동으로 DefaultRootComponent로 초기화해줌)
+    (4) RootContent에서는 instance가 List인지 Detail인지를 구분해서 각 Content파일로 보내주게되고 (예를들어 ListContent로 보내줬다고하면)
+    (5) AppContent를 실행시키면서 화면이 보이게 된다.

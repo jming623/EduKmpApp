@@ -9,24 +9,24 @@ import com.seiko.imageloader.component.setupDefaultComponents
 import com.seiko.imageloader.intercept.bitmapMemoryCacheConfig
 import com.seiko.imageloader.intercept.imageMemoryCacheConfig
 import com.seiko.imageloader.intercept.painterMemoryCacheConfig
+import di.startKoinJvm
 import okio.Path.Companion.toOkioPath
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import root.DefaultRootComponent
+import root.RootComponent
 import root.RootContent
 import java.io.File
 
+
+val koin = startKoinJvm().koin
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
         title = "EduKmpApp",
     ) {
         // commonMain쪽에서 작업후 App()을 아래와같이 변경했을 때, 화면이 모두 공유 됨. (하나의 코드로 여러 플랫폼에서 사용할 수 있다.)
-        val homeViewModel = HomeViewModel()
-        val root = DefaultRootComponent(
-            componentContext = DefaultComponentContext(LifecycleRegistry()),
-            homeViewModel
-        )
-        RootContent(root, modifier = Modifier)
+        val rootComponent = koin.get<RootComponent>()
+        RootContent(rootComponent, modifier = Modifier)
     }
 }
 

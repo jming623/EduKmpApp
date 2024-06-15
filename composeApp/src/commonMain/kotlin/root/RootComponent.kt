@@ -36,7 +36,7 @@ class DefaultRootComponent(
     private val navigation = StackNavigation<Config>()
 
     override val stack: Value<ChildStack<*, RootComponent.Child>> =
-    childStack(
+    childStack( //navigation Stack을 관리하는 함수
         source = navigation,
         serializer = Config.serializer(), // Serializable이 선언된 sealed class를 serializer함수로 (역)직렬화 해서 사용 가능
         initialConfiguration = Config.List, // 애플리케이션 시작 시 첫 번째로 표시될 화면을 지정

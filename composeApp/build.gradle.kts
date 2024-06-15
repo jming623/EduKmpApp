@@ -84,8 +84,11 @@ kotlin {
 
             api(libs.image.loader)
             // Decompose Step1 - navigation사용 목적
-            implementation("com.arkivanov.decompose:decompose:2.2.2-compose-experimental")
-            implementation("com.arkivanov.decompose:extensions-compose-jetbrains:2.2.2-compose-experimental")
+            implementation(libs.arkivanov.decompose.v222composeexperimental)
+            implementation(libs.arkivanov.extensions.compose.jetbrains)
+
+            // Koin Step1 - 의존성 주입 목적
+            implementation(libs.koin.core)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -128,6 +131,8 @@ android {
     }
     dependencies {
         debugImplementation(compose.uiTooling)
+        // Koin Step2
+        implementation(libs.koin.android)
     }
 }
 dependencies {

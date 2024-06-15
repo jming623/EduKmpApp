@@ -13,11 +13,15 @@ import com.seiko.imageloader.component.setupDefaultComponents
 import com.seiko.imageloader.intercept.bitmapMemoryCacheConfig
 import com.seiko.imageloader.intercept.imageMemoryCacheConfig
 import com.seiko.imageloader.intercept.painterMemoryCacheConfig
+import di.startKoin
 import okio.FileSystem
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.skiko.wasm.onWasmReady
 import root.DefaultRootComponent
+import root.RootComponent
 import root.RootContent
+
+val koin = startKoin().koin
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
@@ -26,11 +30,7 @@ fun main() {
             CompositionLocalProvider(
                 LocalImageLoader provides remember { generateImageLoader() },
             ) {
-                val homeViewModel = HomeViewModel()
-                val root = DefaultRootComponent(
-                    componentContext = DefaultComponentContext(LifecycleRegistry()),
-                    homeViewModel
-                )
+                val root = koin.get<RootComponent>()
                 RootContent(root, modifier = Modifier)
             }
         }

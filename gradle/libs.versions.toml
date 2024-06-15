@@ -10,10 +10,12 @@ androidx-core-ktx = "1.13.1"
 androidx-espresso-core = "3.5.1"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.1.5"
+arkivanovDecompose = "2.2.2-compose-experimental"
 compose-plugin = "1.6.10"
 decompose = "<version>"
 imageLoader = "1.7.8"
 junit = "4.13.2"
+koinCore = "3.5.6"
 kotlin = "2.0.0"
 kotlinxCoroutinesCore = "1.7.3"
 kotlinxSerializationJson = "1.6.2"
@@ -22,11 +24,15 @@ mvvmCore = "0.16.1"
 material3Android = "1.2.1"
 
 [libraries]
+arkivanov-decompose-v222composeexperimental = { module = "com.arkivanov.decompose:decompose", version.ref = "arkivanovDecompose" }
+arkivanov-extensions-compose-jetbrains = { module = "com.arkivanov.decompose:extensions-compose-jetbrains", version.ref = "arkivanovDecompose" }
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoader" }
 image-loader-extension-blur = { module = "io.github.qdsfdhvh:image-loader-extension-blur", version.ref = "imageLoader" }
 image-loader-extension-imageio = { module = "io.github.qdsfdhvh:image-loader-extension-imageio", version.ref = "imageLoader" }
 image-loader-extension-moko-resources = { module = "io.github.qdsfdhvh:image-loader-extension-moko-resources", version.ref = "imageLoader" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
