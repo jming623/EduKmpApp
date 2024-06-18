@@ -16,8 +16,8 @@ data class Product(
     val image: String?,
     @SerialName("price")
     val price: Double?,
-    @SerialName("rating")
-    val rating: Rating?,
+//    @SerialName("rating")
+//    val rating: Rating?,
     @SerialName("title")
     val title: String?
 )

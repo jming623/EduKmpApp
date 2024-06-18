@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     kotlin("plugin.serialization") version "2.0.0-RC3" //Decompose Step2
+    id("app.cash.sqldelight") version "2.0.2" // SQLDelight Step1
 }
 
 kotlin {
@@ -59,9 +60,15 @@ kotlin {
             //Decompose Step3
             implementation("com.arkivanov.decompose:decompose:2.2.2-compose-experimental")
             implementation("com.arkivanov.decompose:extensions-compose-jetbrains:2.2.2-compose-experimental")
+
+            // SQLDelight Step3
+            implementation("app.cash.sqldelight:android-driver:2.0.2")
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+
+            // SQLDelight Step3
+            implementation("app.cash.sqldelight:native-driver:2.0.2")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -92,6 +99,17 @@ kotlin {
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+
+            // SQLDelight Step3
+            implementation("app.cash.sqldelight:sqlite-driver:2.0.2")
+        }
+
+        jsMain.dependencies {
+            // SQLDelight Step3
+            implementation("app.cash.sqldelight:web-worker-driver:2.0.2")
+            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
+            implementation(npm("@cashapp/sqldelight-sqljs-worker", "2.0.2"))
+            implementation(npm("sql.js", "1.8.0"))
         }
 
     }
@@ -155,4 +173,14 @@ compose.desktop {
 // Step3
 compose.experimental {
     web.application {}
+}
+
+// SQLDelight Step2
+sqldelight {
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.jetbrains.edukmpapp")
+            generateAsync.set(true)
+        }
+    }
 }

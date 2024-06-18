@@ -3,6 +3,7 @@ package di
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
+import database.DriverFactory
 import org.koin.core.Koin
 import org.koin.dsl.module
 import root.RootComponent
@@ -14,6 +15,9 @@ val iosModule = module {
 
     // LifecycleRegistry로 초기화된 DefaultComponentContext를 사용하여 ComponentContext를 등록
     single<ComponentContext> { DefaultComponentContext(lifecycle = get<LifecycleRegistry>()) }
+
+    // IOS 실행시 에러가 발생해서 Xcode가서 링커 플래그를 추가해줬는데 https://www.youtube.com/watch?v=iRlfJcnLFF8&t=2008s 에 58:41 참고
+    single { DriverFactory() }
 }
 
 fun initKoinIOS() = initKoin(additionalModules = listOf(iosModule)) // iOS용 Koin을 초기화하는 함수

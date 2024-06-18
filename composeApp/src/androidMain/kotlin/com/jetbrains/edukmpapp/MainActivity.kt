@@ -18,6 +18,7 @@ import com.seiko.imageloader.intercept.bitmapMemoryCacheConfig
 import com.seiko.imageloader.intercept.imageMemoryCacheConfig
 import com.seiko.imageloader.intercept.painterMemoryCacheConfig
 import com.seiko.imageloader.option.androidContext
+import database.DriverFactory
 import okio.Path.Companion.toOkioPath
 import org.koin.android.ext.android.inject
 import org.koin.core.context.loadKoinModules
@@ -31,6 +32,7 @@ class MainActivity : ComponentActivity() {
 
     private val modules = module {
         single<ComponentContext> { defaultComponentContext() }
+        single { DriverFactory(applicationContext) }
     }
 
     init {
